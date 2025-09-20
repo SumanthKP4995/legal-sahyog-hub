@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Legal Sahyog Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .rating-stars {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        
+        .rating-stars:hover,
+        .rating-stars.active {
+            color: #ffc107;
+        }
+        
+        .feedback-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feedback-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .consultation-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+        }
+        
+        .rating-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .rating-description {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: 500;
+            color: #666;
+        }
+        
+        .feedback-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .category-item {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-item:hover {
+            border-color: #007bff;
+            background-color: #f8f9fa;
+        }
+        
+        .category-item.selected {
+            border-color: #007bff;
+            background-color: #e3f2fd;
+        }
+        
+        .category-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .thank-you-screen {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .thank-you-icon {
+            width: 100px;
+            height: 100px;
+            background: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            color: white;
+            font-size: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-balance-scale me-2"></i>
+                Legal Sahyog Hub
+            </a>
+            <div class="navbar-nav ms-auto">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user me-1"></i><span id="userName">User</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" onclick="LegalSahyogHub.logout()">
+                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container" style="margin-top: 100px;">
+        <!-- Thank You Screen -->
+        <div id="thankYouScreen" class="thank-you-screen" style="display: none;">
+            <div class="thank-you-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h2 class="text-success mb-3">Thank You for Your Feedback!</h2>
+            <p class="lead mb-4">Your review helps us improve our services and helps other users make informed decisions.</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">What's Next?</h6>
+                            <ul class="list-unstyled text-start">
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Your review has been submitted
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Provider will be notified
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    You can view your review in your dashboard
+                                </li>
+                                <li>
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Consider booking another service
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <a href="user-dashboard.html" class="btn btn-primary me-3">
+                    <i class="fas fa-tachometer-alt me-2"></i>Go to Dashboard
+                </a>
+                <a href="services.html" class="btn btn-outline-primary">
+                    <i class="fas fa-search me-2"></i>Find More Services
+                </a>
+            </div>
+        </div>
+
+        <!-- Feedback Form -->
+        <div id="feedbackForm">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Consultation Summary -->
+                    <div class="consultation-summary mb-4">
+                        <h3 class="mb-3">
+                            <i class="fas fa-video me-2"></i>Consultation Completed
+                        </h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-2">
+                                    <i class="fas fa-user-tie me-2"></i>
+                                    <strong>Provider:</strong> <span id="consultationProvider">Loading...</span>
+                                </div>
+                                <div class="mb-2">
+                                    <i class="fas fa-gavel me-2"></i>
+                                    <strong>Service:</strong> <span id="consultationService">Loading...</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-2">
+                                    <i class="fas fa-calendar me-2"></i>
+                                    <strong>Date:</strong> <span id="consultationDate">Loading...</span>
+                                </div>
+                                <div class="mb-2">
+                                    <i class="fas fa-clock me-2"></i>
+                                    <strong>Duration:</strong> <span id="consultationDuration">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rating Section -->
+                    <div class="rating-section mb-4">
+                        <h4 class="mb-3">
+                            <i class="fas fa-star me-2"></i>How was your consultation?
+                        </h4>
+                        
+                        <div class="star-rating">
+                            <i class="fas fa-star rating-stars" data-rating="1"></i>
+                            <i class="fas fa-star rating-stars" data-rating="2"></i>
+                            <i class="fas fa-star rating-stars" data-rating="3"></i>
+                            <i class="fas fa-star rating-stars" data-rating="4"></i>
+                            <i class="fas fa-star rating-stars" data-rating="5"></i>
+                        </div>
+                        
+                        <div class="rating-description" id="ratingDescription">
+                            Click on a star to rate your experience
+                        </div>
+                    </div>
+
+                    <!-- Feedback Categories -->
+                    <div class="card feedback-card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-tags me-2"></i>What was good about this consultation?
+                            </h5>
+                            <div class="feedback-categories">
+                                <div class="category-item" data-category="professional">
+                                    <div class="category-icon text-primary">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                    <div>Professional</div>
+                                </div>
+                                <div class="category-item" data-category="knowledgeable">
+                                    <div class="category-icon text-info">
+                                        <i class="fas fa-brain"></i>
+                                    </div>
+                                    <div>Knowledgeable</div>
+                                </div>
+                                <div class="category-item" data-category="helpful">
+                                    <div class="category-icon text-success">
+                                        <i class="fas fa-hands-helping"></i>
+                                    </div>
+                                    <div>Helpful</div>
+                                </div>
+                                <div class="category-item" data-category="punctual">
+                                    <div class="category-icon text-warning">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>Punctual</div>
+                                </div>
+                                <div class="category-item" data-category="clear">
+                                    <div class="category-icon text-secondary">
+                                        <i class="fas fa-comments"></i>
+                                    </div>
+                                    <div>Clear Communication</div>
+                                </div>
+                                <div class="category-item" data-category="patient">
+                                    <div class="category-icon text-danger">
+                                        <i class="fas fa-heart"></i>
+                                    </div>
+                                    <div>Patient</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Written Review -->
+                    <div class="card feedback-card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-edit me-2"></i>Share Your Experience
+                            </h5>
+                            <div class="mb-3">
+                                <label for="reviewText" class="form-label">Write a detailed review (optional)</label>
+                                <textarea class="form-control" id="reviewText" rows="5" 
+                                          placeholder="Tell others about your experience with this legal professional..."></textarea>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="isPublic" checked>
+                                <label class="form-check-label" for="isPublic">
+                                    Make this review public (recommended)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-grid">
+                        <button type="button" class="btn btn-primary btn-lg" id="submitFeedbackBtn" onclick="submitFeedback()" disabled>
+                            <i class="fas fa-paper-plane me-2"></i>Submit Feedback
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <!-- Tips Card -->
+                    <div class="card feedback-card mb-4">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Review Tips</h6>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled small">
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Be honest and constructive
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Focus on the service quality
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Mention specific helpful advice
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Keep it professional
+                                </li>
+                                <li>
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Your review helps other users
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Privacy Notice -->
+                    <div class="card feedback-card">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-shield-alt me-2"></i>Privacy Notice</h6>
+                        </div>
+                        <div class="card-body">
+                            <p class="small text-muted">
+                                Your feedback is important to us. Public reviews help other users make informed decisions. 
+                                We may use your feedback to improve our services and provide better support to our legal professionals.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Container -->
+    <div id="alertContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1050;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/feedback.js"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider Registration - Legal Sahyog Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="register-page">
+    <div class="container">
+        <div class="row justify-content-center py-5">
+            <div class="col-md-10 col-lg-8">
+                <div class="card shadow-lg">
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-gavel text-success mb-3" style="font-size: 3rem;"></i>
+                            <h3 class="fw-bold text-success">Legal Professional Registration</h3>
+                            <p class="text-muted">Join our network of verified legal professionals</p>
+                        </div>
+                        
+                        <form id="providerRegisterForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-phone"></i>
+                                    </span>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+                                <div class="form-text">Password must be at least 6 characters long</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="barCouncilNumber" class="form-label">Bar Council Number</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-id-card"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="barCouncilNumber" name="barCouncilNumber" required>
+                                </div>
+                                <div class="form-text">Your Bar Council of India registration number</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="practiceArea" class="form-label">Practice Area</label>
+                                <input type="text" class="form-control" id="practiceArea" name="practiceArea" 
+                                       placeholder="e.g., Criminal Law, Corporate Law, Family Law">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="experienceYears" class="form-label">Years of Experience</label>
+                                <input type="number" class="form-control" id="experienceYears" name="experienceYears" min="0">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="qualification" class="form-label">Educational Qualification</label>
+                                <textarea class="form-control" id="qualification" name="qualification" rows="3" 
+                                          placeholder="List your degrees and certifications"></textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="bio" class="form-label">Professional Bio</label>
+                                <textarea class="form-control" id="bio" name="bio" rows="3" 
+                                          placeholder="Tell us about your professional background and expertise"></textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Office Address</label>
+                                <textarea class="form-control" id="address" name="address" rows="2"></textarea>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="city" class="form-label">City</label>
+                                    <input type="text" class="form-control" id="city" name="city">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="state" class="form-label">State</label>
+                                    <input type="text" class="form-control" id="state" name="state">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="pincode" class="form-label">Pincode</label>
+                                <input type="text" class="form-control" id="pincode" name="pincode">
+                            </div>
+                            
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>Verification Process:</strong> After registration, you'll need to upload your Bar Council certificate and other documents for verification. Your account will be activated once verification is complete.
+                            </div>
+                            
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                                <label class="form-check-label" for="agreeTerms">
+                                    I agree to the <a href="#" class="text-primary">Terms and Conditions</a> and <a href="#" class="text-primary">Provider Agreement</a>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-success w-100 mb-3">
+                                <i class="fas fa-user-plus me-2"></i>Register as Provider
+                            </button>
+                        </form>
+                        
+                        <div class="text-center">
+                            <p class="mb-2">Already have an account?</p>
+                            <a href="login.html" class="btn btn-outline-primary">
+                                <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                            </a>
+                        </div>
+                        
+                        <hr class="my-4">
+                        
+                        <div class="text-center">
+                            <p class="text-muted small">Looking for legal services?</p>
+                            <a href="register.html" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-user me-2"></i>Register as User
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Container -->
+    <div id="alertContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1050;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
